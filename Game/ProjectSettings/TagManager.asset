@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bonus Score
+  - Bonus Time
+  - Malus Time
+  - Dead
+  - Human
   layers:
   - Default
   - TransparentFX
@@ -14,7 +19,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - Bonus Score
   - 
   - 
   - 

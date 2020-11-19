@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class Player : MonoBehaviour
 
 
     // Model
-    public Rigidbody2D rb;
+    private Rigidbody2D rb;
     private CapsuleCollider2D Collider;
 
     // Jump
@@ -33,59 +35,154 @@ public class Player : MonoBehaviour
     public Text timeText;
     private float timeLeft = 30f;
 
+    // Canvas
+    public GameObject gameOverCanvas;
+    public GameObject HUDCanvas;
+
+    // Gameover
+    private bool isGameOver = false;
+    private string reasonOfDeath = "";
+    public Text historyText;
+    public Text scoreDeadText;
+    public Text gameOverText;
+
+    // Triger Enter
+    private float bonusScore = 1000f;
+    private float bonusTime = 10f;
+    private float malusTime = 10f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Collider = GetComponent<CapsuleCollider2D>();
         playerAnimator = GetComponent<Animator>();
         timeText.text = Mathf.Round(timeLeft) + "";
+        gameOverCanvas.SetActive(false);
+        Time.timeScale = 1;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        // Run and Jump
-        if (canMove)
+        if (!isGameOver)
         {
-            rb.velocity = new Vector2(5, rb.velocity.y);
-            onGround = Physics2D.IsTouchingLayers(Collider, whatIsGround);
-            if (Input.GetKey(KeyCode.Space) && onGround)
+            // Run and Jump
+            if (canMove)
             {
-                //Debug.Log("Space");
-                rb.velocity = new Vector2(rb.velocity.x, 6);
+                //rb.velocity = new Vector2(5, rb.velocity.y);
+                rb.AddForce(transform.right * 5);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, 8);
+                onGround = Physics2D.IsTouchingLayers(Collider, whatIsGround);
+                if (Input.GetKey(KeyCode.Space) && onGround)
+                {
+                    //Debug.Log("Space");
+                    rb.velocity = new Vector2(rb.velocity.x, 6);
+                }
+
+                
+                    
+            }
+
+
+
+            // Animation 
+            playerAnimator.SetBool("Grounded", onGround);
+
+
+            //Score and Time
+            if (timeLeft <= 0)
+            {
+                reasonOfDeath = "Temps Ecoulé";
+                GameOver();
+                canMove = false;
+            }
+            else if (transform.position.y < -10)
+            {
+                reasonOfDeath = "Mort";
+                GameOver();
+            }
+            else
+            {
+                Score();
+                DecreaseTime();
             }
         }
         
-
-        // Animation 
-        playerAnimator.SetBool("Grounded", onGround);
-
-
-        //Score and Time
-        if(timeLeft <= 0)
-        {
-            canMove = false;
-        }
-        else
-        {
-            Score();
-            DecreaseTime();
-        }
-        
     }
 
+    // Function to show the score
     private void Score()
     {
-        scoreText.text = (int)scoreAmount + "";
+        scoreText.text = "Score : " + (int)scoreAmount;
         scoreAmount += pointIncreasedPerSecond * Time.deltaTime;
     }
 
+    // Function to decrease the time
     private void DecreaseTime()
     {
         timeLeft -= Time.deltaTime;
-        timeText.text = Mathf.Round(timeLeft) + "";
+        timeText.text = "Temps : " + Mathf.Round(timeLeft);
     }
+
+    // Function Game over to change canvas
+    public void GameOver()
+    {
+        Time.timeScale = 0;
+        scoreDeadText.text = "Score : " + (int)scoreAmount;
+        historyText.text = "Ceci est un cours d'histoire.";
+        gameOverText.text = reasonOfDeath;
+        gameOverCanvas.SetActive(true);
+        HUDCanvas.SetActive(false);
+        isGameOver = true;
+
+    }
+
+    // Function Replay to reload the scene
+    public void Replay()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+
+    // Function for all collider enter
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "Bonus Score")
+        {
+            scoreAmount += bonusScore;
+        }
+
+        if (col.tag == "Bonus Time")
+        {
+            timeLeft += bonusTime;
+        }
+
+        if (col.tag == "Malus Time")
+        {
+            timeLeft -= malusTime;
+        }
+
+        if (col.tag == "Dead")
+        {
+            reasonOfDeath = "Mort";
+            GameOver();
+        }
+
+        if (col.tag == "Human")
+        {
+            scoreAmount += bonusScore;
+            timeLeft += bonusTime;
+        }
+
+
+        Destroy(col.gameObject);
+    }
+
+
+    //Function when the player is dead
+    
+
 }
 
 
