@@ -51,6 +51,13 @@ public class Player : MonoBehaviour
     private float bonusTime = 10f;
     private float malusTime = 10f;
 
+    // Audio Clip
+    public GameObject soundEffectsGO;
+    private AudioSource [] soundEffectsAS;
+    private AudioSource bonusEffect;
+    private AudioSource malusEffect;
+    private AudioSource gameOverEffect;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,6 +66,10 @@ public class Player : MonoBehaviour
         timeText.text = Mathf.Round(timeLeft) + "";
         gameOverCanvas.SetActive(false);
         Time.timeScale = 1;
+        soundEffectsAS = soundEffectsGO.GetComponents<AudioSource>();
+        bonusEffect = soundEffectsAS[0];
+        malusEffect = soundEffectsAS[1];
+        gameOverEffect = soundEffectsAS[2];
 
     }
 
@@ -81,6 +92,11 @@ public class Player : MonoBehaviour
 
                 
                     
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                scoreAmount += 1000;
             }
 
 
@@ -127,9 +143,10 @@ public class Player : MonoBehaviour
     // Function Game over to change canvas
     public void GameOver()
     {
+        gameOverEffect.Play();
         Time.timeScale = 0;
         scoreDeadText.text = "Score : " + (int)scoreAmount;
-        historyText.text = "Ceci est un cours d'histoire.";
+        chooseSentence();
         gameOverText.text = reasonOfDeath;
         gameOverCanvas.SetActive(true);
         HUDCanvas.SetActive(false);
@@ -156,16 +173,19 @@ public class Player : MonoBehaviour
         if (col.tag == "Bonus Score")
         {
             scoreAmount += bonusScore;
+            bonusEffect.Play();
         }
 
         if (col.tag == "Bonus Time")
         {
             timeLeft += bonusTime;
+            bonusEffect.Play();
         }
 
         if (col.tag == "Malus Time")
         {
             timeLeft -= malusTime;
+            malusEffect.Play();
         }
 
         if (col.tag == "Dead")
@@ -185,7 +205,37 @@ public class Player : MonoBehaviour
     }
 
 
-    //Function when the player is dead
+    //Function to choose the right sentence at death / end of the game.
+    void chooseSentence()
+    {
+        
+        if (scoreAmount < 10000)
+            historyText.text = "Peste de Madagascar";
+
+        else if(scoreAmount >= 10000 && scoreAmount < 20000)
+            historyText.text = "Peste de San Francisco";
+
+        else if (scoreAmount >= 20000 && scoreAmount < 30000)
+            historyText.text = "Peste de Marseille";
+
+        else if (scoreAmount >= 30000 && scoreAmount < 40000)
+            historyText.text = "Peste de Athène";
+
+        else if (scoreAmount >= 40000 && scoreAmount < 50000)
+            historyText.text = "Peste de Londres";
+
+        else if (scoreAmount >= 50000 && scoreAmount < 60000)
+            historyText.text = "Peste de Antonine";
+
+        else if (scoreAmount >= 60000 && scoreAmount < 70000)
+            historyText.text = "Peste de Chine";
+
+        else if (scoreAmount >= 80000 && scoreAmount < 90000)
+            historyText.text = "Peste Justinien ";
+
+        else if (scoreAmount >= 90000)
+            historyText.text = "Peste Noir";
+    }
     
 
 }
