@@ -47,9 +47,9 @@ public class Player : MonoBehaviour
     public Text gameOverText;
 
     // Triger Enter
-    private float bonusScore = 1000f;
-    private float bonusTime = 10f;
-    private float malusTime = 10f;
+    private float bonusScore = 500f;
+    private float bonusTime = 5f;
+    private float malusTime = 15f;
 
     // Audio Clip
     public GameObject soundEffectsGO;
@@ -184,18 +184,21 @@ public class Player : MonoBehaviour
         {
             scoreAmount += bonusScore;
             bonusEffect.Play();
+            Destroy(col.gameObject);
         }
 
         if (col.tag == "Bonus Time")
         {
             timeLeft += bonusTime;
             bonusEffect.Play();
+            Destroy(col.gameObject);
         }
 
         if (col.tag == "Malus Time")
         {
             timeLeft -= malusTime;
             malusEffect.Play();
+            Destroy(col.gameObject);
         }
 
         if (col.tag == "Dead")
@@ -208,15 +211,16 @@ public class Player : MonoBehaviour
         {
             scoreAmount += bonusScore;
             timeLeft += bonusTime;
+            bonusEffect.Play();
         }
 
 
-        Destroy(col.gameObject);
+        
     }
 
 
     //Function to choose the right sentence at death / end of the game.
-    void chooseSentence()
+    /*void chooseSentence()
     {
         
         if (scoreAmount < 10000)
@@ -245,8 +249,18 @@ public class Player : MonoBehaviour
 
         else if (scoreAmount >= 90000)
             historyText.text = "Peste Noir";
+    }*/
+
+    void chooseSentence()
+    {
+
+        if (scoreAmount < 20000)
+            historyText.text = "Peste de Madagascar";
+
+        else if (scoreAmount >= 20000 )
+            historyText.text = "Peste de San Francisco";
     }
-    
+
 
 }
 

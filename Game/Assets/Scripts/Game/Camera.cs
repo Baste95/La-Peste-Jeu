@@ -31,7 +31,11 @@ public class Camera : MonoBehaviour
     {
         transform.position = new Vector3((player.position.x + 12), 7, transform.position.z);
         // player = GameObject.FindWithTag("Player");
-        if(playerScript.scoreAmount >= 5000 && playerScript.scoreAmount < 10000){
+        if(playerScript.scoreAmount >= 20000){
+            RenderSettings.skybox = skybox2;
+        }
+       /* if (playerScript.scoreAmount >= 5000 && playerScript.scoreAmount < 10000)
+        {
             RenderSettings.skybox = skybox2;
         }
         if(playerScript.scoreAmount >= 10000 && playerScript.scoreAmount < 15000){
@@ -48,6 +52,6 @@ public class Camera : MonoBehaviour
         }
         if(playerScript.scoreAmount >= 30000 && playerScript.scoreAmount < 35000){
             RenderSettings.skybox = skybox7;
-        }
+        }*/
     }
 }
