@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     // Score
     public Text scoreText;
-    private float scoreAmount = 0f;
+    public float scoreAmount = 0f;
     private float pointIncreasedPerSecond = 20f;
 
     // Time
@@ -57,6 +57,10 @@ public class Player : MonoBehaviour
     private AudioSource bonusEffect;
     private AudioSource malusEffect;
     private AudioSource gameOverEffect;
+
+    // Skybox
+    // public Material skybox2;
+    // public Material skybox3;
 
     void Start()
     {
@@ -123,6 +127,12 @@ public class Player : MonoBehaviour
                 DecreaseTime();
             }
         }
+        // switch ((int)scoreAmount)
+        // {
+        //     case 1000:
+        //         RenderSettings.skybox = skybox2;
+        //         break;
+        // }
         
     }
 

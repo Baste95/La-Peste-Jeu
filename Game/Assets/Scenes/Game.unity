@@ -280,7 +280,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42483369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.65, y: 7.1, z: -21.35}
+  m_LocalPosition: {x: 2.58, y: 5.76, z: -21.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1397557617}
@@ -300,6 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 558162426}
+  playerScript: {fileID: 730335635}
+  skybox1: {fileID: 2100000, guid: 05e1671fd57825f2fb11b6427bab0e0c, type: 2}
+  skybox2: {fileID: 2100000, guid: 9d6098edd3e11e9feb72ea5df299b4c8, type: 2}
 --- !u!1 &224711562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2984,9 +2987,29 @@ PrefabInstance:
       propertyPath: soundEffectsGO
       value: 
       objectReference: {fileID: 1891389370}
+    - target: {fileID: 621768653523700410, guid: c21c3ca5d2ca1484990131a9a2ca83c1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 621768653523700410, guid: c21c3ca5d2ca1484990131a9a2ca83c1,
+        type: 3}
+      propertyPath: skybox2
+      value: 
+      objectReference: {fileID: 2100000, guid: 6a7d6ac5b1437bcdda36c20a062c8926, type: 2}
+    - target: {fileID: 621768653523700410, guid: c21c3ca5d2ca1484990131a9a2ca83c1,
+        type: 3}
+      propertyPath: skybox3
+      value: 
+      objectReference: {fileID: 2100000, guid: 9d6098edd3e11e9feb72ea5df299b4c8, type: 2}
     - target: {fileID: 4170926984134262328, guid: c21c3ca5d2ca1484990131a9a2ca83c1,
         type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4170926984134262328, guid: c21c3ca5d2ca1484990131a9a2ca83c1,
+        type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4692760210579564206, guid: c21c3ca5d2ca1484990131a9a2ca83c1,
