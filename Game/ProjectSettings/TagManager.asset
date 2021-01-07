@@ -9,6 +9,7 @@ TagManager:
   - Malus Time
   - Dead
   - Human
+  - Bonus Time Score
   layers:
   - Default
   - TransparentFX

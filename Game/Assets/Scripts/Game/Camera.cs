@@ -16,7 +16,9 @@ public class Camera : MonoBehaviour
     public Material skybox5;
     public Material skybox6;
     public Material skybox7;
-    
+    public Material skybox8;
+    public Material skybox9;
+
 
     // GameObject player;
 
@@ -30,28 +32,32 @@ public class Camera : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3((player.position.x + 12), 7, transform.position.z);
-        // player = GameObject.FindWithTag("Player");
-        if(playerScript.scoreAmount >= 20000){
-            RenderSettings.skybox = skybox2;
-        }
-       /* if (playerScript.scoreAmount >= 5000 && playerScript.scoreAmount < 10000)
+        if(playerScript.scoreAmount >= 10000 && playerScript.scoreAmount < 20000)
         {
             RenderSettings.skybox = skybox2;
         }
-        if(playerScript.scoreAmount >= 10000 && playerScript.scoreAmount < 15000){
-            RenderSettings.skybox = skybox3;
+        if (playerScript.scoreAmount >= 20000 && playerScript.scoreAmount < 30000)
+         {
+             RenderSettings.skybox = skybox3;
+         }
+         if(playerScript.scoreAmount >= 30000 && playerScript.scoreAmount < 40000){
+             RenderSettings.skybox = skybox4;
+         }
+         if(playerScript.scoreAmount >= 40000 && playerScript.scoreAmount < 50000){
+             RenderSettings.skybox = skybox5;
+         }
+         if(playerScript.scoreAmount >= 50000 && playerScript.scoreAmount < 60000){
+             RenderSettings.skybox = skybox6;
+         }
+         if(playerScript.scoreAmount >= 60000 && playerScript.scoreAmount < 70000){
+             RenderSettings.skybox = skybox7;
+         }
+         if(playerScript.scoreAmount >= 70000 && playerScript.scoreAmount < 80000){
+             RenderSettings.skybox = skybox8;
+         }
+        if (playerScript.scoreAmount >= 90000 )
+        {
+            RenderSettings.skybox = skybox9;
         }
-        if(playerScript.scoreAmount >= 15000 && playerScript.scoreAmount < 20000){
-            RenderSettings.skybox = skybox4;
-        }
-        if(playerScript.scoreAmount >= 20000 && playerScript.scoreAmount < 25000){
-            RenderSettings.skybox = skybox5;
-        }
-        if(playerScript.scoreAmount >= 25000 && playerScript.scoreAmount < 30000){
-            RenderSettings.skybox = skybox6;
-        }
-        if(playerScript.scoreAmount >= 30000 && playerScript.scoreAmount < 35000){
-            RenderSettings.skybox = skybox7;
-        }*/
     }
 }

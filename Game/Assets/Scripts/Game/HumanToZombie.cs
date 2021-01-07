@@ -6,15 +6,18 @@ public class HumanToZombie : MonoBehaviour
 {
     private SpriteRenderer spriteCharacter;
 
+    // Animation
+    private Animator playerAnimator;
+
     private void Start()
     {
-        spriteCharacter = GetComponent<SpriteRenderer>();
+        playerAnimator = GetComponent<Animator>();
     }
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
         {
-            spriteCharacter.sprite = Resources.Load<Sprite>("Sprites/Characters/zombie_stand");
+            playerAnimator.SetBool("Dead", true);
         }
     }
 }

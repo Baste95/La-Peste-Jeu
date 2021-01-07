@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     // Model
     private Rigidbody2D rb;
     private CapsuleCollider2D Collider;
+    private BoxCollider2D ColliderGround;
 
     // Jump
     public float groundCheckRadius;
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Collider = GetComponent<CapsuleCollider2D>();
+        ColliderGround = GetComponent<BoxCollider2D>();
         playerAnimator = GetComponent<Animator>();
         timeText.text = Mathf.Round(timeLeft) + "";
         gameOverCanvas.SetActive(false);
@@ -85,9 +87,9 @@ public class Player : MonoBehaviour
             // Run and Jump
             if (canMove)
             {
-                rb.AddForce(transform.right * 4);
-                rb.velocity = Vector3.ClampMagnitude(rb.velocity, 7);
-                onGround = Physics2D.IsTouchingLayers(Collider, whatIsGround);
+                rb.AddForce(transform.right * 10);
+                rb.velocity = Vector3.ClampMagnitude(rb.velocity, 10);
+                onGround = Physics2D.IsTouchingLayers(ColliderGround, whatIsGround);
                 if (Input.GetKey(KeyCode.Space) && onGround)
                 {
                     //Debug.Log("Space");
@@ -194,6 +196,14 @@ public class Player : MonoBehaviour
             Destroy(col.gameObject);
         }
 
+        if (col.tag == "Bonus Time Score")
+        {
+            timeLeft += (bonusTime/2);
+            scoreAmount += (bonusScore/2);
+            bonusEffect.Play();
+            Destroy(col.gameObject);
+        }
+
         if (col.tag == "Malus Time")
         {
             timeLeft -= malusTime;
@@ -220,46 +230,38 @@ public class Player : MonoBehaviour
 
 
     //Function to choose the right sentence at death / end of the game.
-    /*void chooseSentence()
+    void chooseSentence()
     {
         
         if (scoreAmount < 10000)
-            historyText.text = "Peste de Madagascar";
+            historyText.text = "Le saviez-vous ? 202  c'est le nombre de mort par les épédimies à Madagascar.";
 
         else if(scoreAmount >= 10000 && scoreAmount < 20000)
-            historyText.text = "Peste de San Francisco";
+            historyText.text = "Le saviez-vous ? Entre 1900 et 1904, il y a eu une épidémie de peste à San Francisco ayant fait une centaine de décès.";
 
         else if (scoreAmount >= 20000 && scoreAmount < 30000)
-            historyText.text = "Peste de Marseille";
+            historyText.text = "Le saviez-vous ? La peste de Marseille de 1720 a causé la perte de 30 à 50 000 habitants.";
 
         else if (scoreAmount >= 30000 && scoreAmount < 40000)
-            historyText.text = "Peste de Athène";
+            historyText.text = "Le saviez-vous ? La peste d’Athènes est apparue en -430 avant Jésus-Christ à Athènes";
 
         else if (scoreAmount >= 40000 && scoreAmount < 50000)
-            historyText.text = "Peste de Londres";
+            historyText.text = "Le saviez-vous ? La peste de 1665 à Londres fut dévastatrice avec environ 100 000 morts.";
 
         else if (scoreAmount >= 50000 && scoreAmount < 60000)
-            historyText.text = "Peste de Antonine";
+            historyText.text = "Le saviez-vous ? La peste Antonine à durer 23 ans de 166 jusqu’à 189, c’était l’une des origines de la chute de l’Empire Romain.";
 
         else if (scoreAmount >= 60000 && scoreAmount < 70000)
-            historyText.text = "Peste de Chine";
+            historyText.text = "Le saviez-vous ? Durant la peste chinoise il y a eu 15 millions de morts entre 1855 date de la première épidémie et 1945 en chine lié à la peste.";
 
-        else if (scoreAmount >= 80000 && scoreAmount < 90000)
-            historyText.text = "Peste Justinien ";
+        else if (scoreAmount >= 70000 && scoreAmount < 80000)
+            historyText.text = "Le saviez-vous ? La peste justinienne a frappé l’Empire Byzantin entre 541 et 542.";
 
-        else if (scoreAmount >= 90000)
-            historyText.text = "Peste Noir";
-    }*/
-
-    void chooseSentence()
-    {
-
-        if (scoreAmount < 20000)
-            historyText.text = "Peste de Madagascar";
-
-        else if (scoreAmount >= 20000 )
-            historyText.text = "Peste de San Francisco";
+        else if (scoreAmount >= 80000)
+            historyText.text = "Le saviez-vous ? La peste noire a duré de 1347 à 1351 a totalement « dévasté l’Europe ».";
     }
+
+    
 
 
 }
