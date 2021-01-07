@@ -227,7 +227,7 @@ MonoBehaviour:
   skybox5: {fileID: 2100000, guid: 9d6098edd3e11e9feb72ea5df299b4c8, type: 2}
   skybox6: {fileID: 2100000, guid: 7b448f32169abe0469026c5c5b95e290, type: 2}
   skybox7: {fileID: 2100000, guid: 6a7d6ac5b1437bcdda36c20a062c8926, type: 2}
-  skybox8: {fileID: 2100000, guid: 05e1671fd57825f2fb11b6427bab0e0c, type: 2}
+  skybox8: {fileID: 2100000, guid: b3896bb6e9e19f5478bad5af5c937ad8, type: 2}
   skybox9: {fileID: 2100000, guid: 5df536d5a3c107540afd349a84069637, type: 2}
 --- !u!1 &224711562
 GameObject:

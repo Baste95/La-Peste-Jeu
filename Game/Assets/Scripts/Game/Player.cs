@@ -105,6 +105,11 @@ public class Player : MonoBehaviour
                 scoreAmount += 1000;
             }
 
+            if (Input.GetKey(KeyCode.M))
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 6);
+            }
+
 
 
             // Animation 
